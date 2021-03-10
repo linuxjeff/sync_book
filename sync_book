@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+BOOKCHROMIUM=~/.config/chromium/Default/Bookmarks
+BOOKDIFF=~/.megashell/Bookmarks
+TIMEL='300'
+
+mkdir ~/.megashell
+
+cp "$BOOKCHROMIUM" "$BOOKDIFF"
+
+while [[ true ]]; do
+	diff "$BOOKDIFF" "$BOOKCHROMIUM" || mega-put "$BOOKCHROMIUM"
+	diff "$BOOKDIFF" "$BOOKCHROMIUM" || cp "$BOOKCHROMIUM" "$BOOKDIFF"
+	sleep "$TIMEL"
+	
+done
